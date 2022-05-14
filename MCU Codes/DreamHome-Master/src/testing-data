@@ -1,0 +1,17 @@
+docServer : 6144 dyn
+appiance : 2048 dyn
+operator : 3072 dyn
+port mac 768 sta
+
+
+{
+"ap_data": {"40:F5:20:33:15:14": {"D0": {"category": 0, "is_active": true, "manual": false, "status": false}, "D1": {"category": 0, "is_active": true, "manual": false, "status": false}, "D2": {"category": 0, "is_active": true, "manual": false, "status": false}, "D3": {"category": 0, "is_active": true, "manual": false, "status": false}, "D4": {"category": 0, "is_active": true, "manual": false, "status": false}, "D5": {"category": 0, "is_active": true, "manual": false, "status": false}, "D6": {"category": 0, "is_active": true, "manual": false, "status": false}, "D7": {"category": 0, "is_active": true, "manual": false, "status": false}, "D8": {"category": 0, "is_active": true, "manual": false, "status": false}, "A0": {"category": 0, "is_active": true, "manual": false, "status": false}}},
+"op_data": {"84:0D:8E:82:B6:94": {"A0": {"category": 0, "dimensions_data": {"capacity": 500, "height": 3.08333, "circumstances": 9.297618}, "is_active": true, "sensor_max_value": 1023.0, "sensor_min_value": 0.0}, "D0": {"category": 0, "dimensions_data": {"capacity": 500, "height": 3.08333, "circumstances": 9.297618}, "is_active": true, "sensor_max_value": 1023.0, "sensor_min_value": 0.0}, "D1": {"category": 0, "dimensions_data": {"capacity": 500, "height": 3.08333, "circumstances": 9.297618}, "is_active": true, "sensor_max_value": 1023.0, "sensor_min_value": 0.0}, "D2": {"category": 0, "dimensions_data": {"capacity": 500, "height": 3.08333, "circumstances": 9.297618}, "is_active": true, "sensor_max_value": 1023.0, "sensor_min_value": 0.0}, "D3": {"category": 0, "dimensions_data": {"capacity": 500, "height": 3.08333, "circumstances": 9.297618}, "is_active": true, "sensor_max_value": 1023.0, "sensor_min_value": 0.0}, "D4": {"category": 0, "dimensions_data": {"capacity": 500, "height": 3.08333, "circumstances": 9.297618}, "is_active": true, "sensor_max_value": 1023.0, "sensor_min_value": 0.0}, "D5": {"category": 0, "dimensions_data": {"capacity": 500, "height": 3.08333, "circumstances": 9.297618}, "is_active": true, "sensor_max_value": 1023.0, "sensor_min_value": 0.0}, "D6": {"category": 0, "dimensions_data": {"capacity": 500, "height": 3.08333, "circumstances": 9.297618}, "is_active": true, "sensor_max_value": 1023.0, "sensor_min_value": 0.0}, "D7": {"category": 0, "dimensions_data": {"capacity": 500, "height": 3.08333, "circumstances": 9.297618}, "is_active": true, "sensor_max_value": 1023.0, "sensor_min_value": 0.0}, "D8": {"category": 0, "dimensions_data": {"capacity": 500, "height": 3.08333, "circumstances": 9.297618}, "is_active": true, "sensor_max_value": 1023.0, "sensor_min_value": 0.0}}},
+"op_ap_mac_map": {"84:0D:8E:82:B6:94": {"A0": {"40:F5:20:33:15:14": "D0"}, "D0": {"40:F5:20:33:15:14": "D0"}, "D1": {"40:F5:20:33:15:14": "D0"}, "D2": {"40:F5:20:33:15:14": "D0"}, "D3": {"40:F5:20:33:15:14": "D0"}, "D4": {"40:F5:20:33:15:14": "D0"}, "D5": {"40:F5:20:33:15:14": "D0"}, "D6": {"40:F5:20:33:15:14": "D0"}, "D7": {"40:F5:20:33:15:14": "D0"}, "D8": {"40:F5:20:33:15:14": "D0"}}}
+}
+
+
+
+
+
+

@@ -1,0 +1,42 @@
+{% extends base_template %}
+{% load static %}
+{% load dh_static %}
+
+
+
+{% block base_head %}
+	<link rel="stylesheet" type="text/css" href="{% dh_static this_app 'base.css' %}?v={{request.META.static_version}}">
+	<script type="text/javascript" src="{% dh_static this_app 'base.js' %}?v={{request.META.static_version}}"></script>
+	{% block this_base_head %}
+		
+	{% endblock %}	
+
+{% endblock %}
+
+
+{% block base_css %}
+
+	{% block this_base_css %}
+
+	{% endblock %}	
+
+{% endblock %}		
+
+
+{% block base_body %}
+
+	{% block this_base_body %}
+
+	{% endblock %}
+
+{% endblock %}
+
+
+
+{% block base_js %}
+
+	{% block this_base_js %}
+
+	{% endblock %}
+
+{% endblock %}	

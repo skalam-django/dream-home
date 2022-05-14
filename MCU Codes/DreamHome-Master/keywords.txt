@@ -1,0 +1,14 @@
+# Syntax Coloring Map For DreamHome-driver
+
+# Datatypes (KEYWORD1)
+DreamHome		KEYWORD3
+
+# Methods and Functions (KEYWORD2)
+getWiFiSSID 	KEYWORD2
+getWiFiPASS 	KEYWORD2
+getAuthKey 		KEYWORD2
+getEEPROM 		KEYWORD2
+
+# Instances (KEYWORD2)
+
+# Constants (LITERAL1)

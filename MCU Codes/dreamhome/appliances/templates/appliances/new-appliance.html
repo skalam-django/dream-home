@@ -1,0 +1,180 @@
+{% csrf_token %}
+{% load static %}
+{% load dh_static %}
+<style type="text/css">
+  
+    .new-appliances-form {
+      white-space: nowrap;
+      position: relative;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.12);
+      text-align: left !important;
+    }
+
+    .new-appliances-title {
+      -o-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      font-size: 18px;
+
+    }  
+
+</style>
+
+
+<dialog class="mdl-dialog dialog" id="new-appliances-dialoge">
+  <header class="mdl-layout__header">
+    <div id="new-appliances-close" class="close dialog-close">×</div>
+    <div class="dialog-header">
+      <div class="new-order-form">
+        <div class="new-order-title">New Appliance Form</div> 
+      </div>
+    </div>
+    
+  </header>
+
+  <div class="mdl-dialog__content dialog__content dialog-content" style="min-height: 23em;">
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-fields">
+      <input class="mdl-textfield__input" type="text" id="appliances_name" autocomplete="off" tabindex="0" autocapitalize="off" autocorrect="off" spellcheck="false">
+      <label class="mdl-textfield__label" for="appliances_name">Appliance Name</label>
+      <div class="help" style="display: none;">Please enter a appliances name</div>
+    </div>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
+        <input type="text" value="" class="mdl-textfield__input" id="category" readonly>
+        <input type="hidden" value="" name="category">
+        <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+        <label for="category" class="mdl-textfield__label">Appliance Category</label>
+        <ul for="category" class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" id="category-ul">
+          {% for category in appliances_all_categories %}
+            {% if forloop.counter0 == 0 %}
+              <li class="mdl-menu__item" data-val="{{forloop.counter0}}" >{{category}}</li>
+            {% else %}
+              <li disabled class="mdl-menu__item" data-val="{{forloop.counter0}}" >{{category}}</li>
+            {% endif %}
+            
+          {% endfor %}
+        </ul>
+    </div>
+    
+
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
+        <input type="text" value="" class="mdl-textfield__input" id="avail_port" readonly>
+        <input type="hidden" value="" name="avail_port">
+        <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+        <label for="avail_port" class="mdl-textfield__label">Port</label>
+        <ul for="avail_port" class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" id="avail_port-ul">
+          {% for port in avail_ports %}
+              <li class="mdl-menu__item" data-val="{{port}}" >{{port}}</li>            
+          {% endfor %}
+        </ul>
+    </div>
+
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-fields">
+      <input class="mdl-textfield__input" type="number" id="power_rating" autocomplete="off" tabindex="0" autocapitalize="off" autocorrect="off" spellcheck="false">
+      <label class="mdl-textfield__label" for="power_rating">Power Rating (Watt)</label>
+      <div class="help" style="display: none;">Please enter power rating</div>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-fields">
+      <input class="mdl-textfield__input" type="number" id="voltage_rating" autocomplete="off" tabindex="0" autocapitalize="off" autocorrect="off" spellcheck="false">
+      <label class="mdl-textfield__label" for="voltage_rating">Voltage Rating (Volt)</label>
+      <div class="help" style="display: none;">Please enter voltage rating</div>
+    </div>
+
+    <Portal>
+      <div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar" id="snackbar2" style="">
+        <div class="mdl-snackbar__text"></div>
+        <button type="button" class="mdl-snackbar__action"></button>
+      </div>
+    </Portal>
+
+    <div id="loader2" style="display: none; z-index: 1050;  position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);">
+      <div class = "mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+    </div>
+</div>
+
+
+<div id="progress-bar" class="mdl-progress mdl-js-progress" style="display: none; width: 344px;bottom: -17em;transform: translateY(100%);"></div>
+<footer class="mdl-mega-footer footer">
+  {% if avail_ports|length > 0 %}
+    <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" style="width: 100%;height: 55px;" id="create-appliances">Add Appliance</button>
+  {% else %}
+  <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" style="width: 100%;height: 55px;" id="create-appliances" disabled>Port unavailable</button>
+  {% endif %}
+
+</footer>
+</dialog>
+ 
+<script type="text/javascript">
+
+  let newapplianceDialog = null;
+  document.addEventListener("DOMContentLoaded", function(event) { 
+      // document.querySelectorAll('.mdc-text-field').forEach(function(el){
+      //   BASE_TEMPLATE_JS.textFieldArr.push(new mdc.textField.MDCTextField(el));
+      // }); 
+
+    newapplianceDialog = document.querySelector('#new-appliances-dialoge');
+    if (! newapplianceDialog.showModal) {
+      dialogPolyfill.registerDialog(newapplianceDialog);
+    }
+    newapplianceDialog.querySelector('#new-appliances-close').addEventListener('click', function() {
+      newapplianceDialog.close();
+    });  
+
+    document.querySelector('#create-appliances').addEventListener('click', function() {
+      var name = document.querySelector('#appliances_name').value || null;
+      var category = document.querySelector("input[name='category']").value || null;
+      var port = document.querySelector("input[name='avail_port']").value || null;
+      var power_rating = document.querySelector('#power_rating').value || null;
+      var voltage_rating = document.querySelector('#voltage_rating').value || null;
+        if (BASE_JS.is_valid_value(name)==false || name==""){
+          BASE_JS.showToast(0, "Appliance Name is required");
+          return;
+        }else if (BASE_JS.is_valid_value(category)==false || category==""){
+          BASE_JS.showToast(0, "Appliance Category is required");
+          return;
+        }else if (BASE_JS.is_valid_value(port)==false || port==""){
+          BASE_JS.showToast(0, "Port is required");
+          return;
+        }
+        if (BASE_JS.is_valid_value(voltage_rating)==true || voltage_rating!=""){
+          if (voltage_rating>parseFloat("{{relay_voltage_rating}}")){
+            BASE_JS.showToast(0, `Appliance voltage rating can't exceed beyond {{relay_voltage_rating}} Volt`);
+            return;
+          }
+        }        
+
+        if (BASE_JS.is_valid_value(power_rating)==true || power_rating!=""){
+          if (power_rating>parseFloat("{{relay_power_rating}}")){
+            BASE_JS.showToast(0, `Appliance power rating can't exceed beyond {{relay_power_rating}} Watt`);
+            return;
+          }
+        } 
+
+      var smart_ajax = new BASE_JS.SmartAjax({
+          url : location.href,
+          json_data : {
+                        add             :   true,
+                        name            :   name,
+                        category        :   category,
+                        port            :   port,
+                        power_rating    :   power_rating,
+                        voltage_rating  :   voltage_rating,                 
+                      },
+          success_callback : function(response){
+            if(response.success==true){
+              newapplianceDialog.close();
+              location.reload();
+            }else if(response.error==true){
+              BASE_TEMPLATE_JS.show_error(response);
+            }
+          },
+          error_callback : function(response){
+            BASE_TEMPLATE_JS.show_error(response);
+          },          
+      });
+      smart_ajax.get_update();
+    });
+  });
+</script>

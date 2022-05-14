@@ -1,0 +1,59 @@
+{% load static %}
+{% load dh_static %}
+
+{% if error %}
+	<div style="margin-top: 0px; width: 100%">
+	
+		<img src="{% dh_static 'dreamhome' 'something-went-wrong.gif' %}" alt="Something went wrong" width="200px" height="200px">
+
+		<div style="margin-top: 10px">
+			<strong style="color: grey; font-size: 20px;">{{error_details.description}}</strong>
+		</div>
+	</div>
+{% else %}
+
+		<div class="appliances-details" style="margin:0em;border: ridge; max-width: 100%;">
+			<ul class="mdl-list" style="margin-top: 0; margin-bottom: 0; padding-top: 0;">
+			  <li class="mdl-list__item mdl-list__item--three-line" style="padding-top: 0; padding-bottom: 0; height: fit-content;">
+			    <span class="mdl-list__item-primary-content" style="height: fit-content; padding-left: .5em;width: 100%;">
+			      <span>{{details_obj.name}}</span>
+			      <span class="mdl-list__item-text-body" style="height : fit-content">
+			      	<div>Active duration: {{details_obj.active_dur}}</div>
+			      	<div>Total active duration: {{details_obj.total_active_dur}}</div>
+
+			      	<div style="max-width: 95%;">
+
+					    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-fields">
+					      <input class="mdl-textfield__input port specifications" type="number" step="1" id="port_{{details_obj.id}}" autocomplete="off" tabindex="0" autocapitalize="off" autocorrect="off" spellcheck="false" value="{{details_obj.port}}">
+					      <label class="mdl-textfield__label" for="port_{{details_obj.id}}">Port (P?)</label>
+					      <div class="help" style="display: none;">Please enter a port</div>
+					    </div>
+
+					    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-fields">
+					      <input class="mdl-textfield__input power_rating specifications" type="number" step="any" id="power_rating_{{details_obj.id}}" autocomplete="off" tabindex="0" autocapitalize="off" autocorrect="off" spellcheck="false" value="{{details_obj.power_rating}}">
+					      <label class="mdl-textfield__label" for="power_rating_{{details_obj.id}}">Power Rating (Watt)</label>
+					      <div class="help" style="display: none;">Please enter power rating</div>
+					    </div>
+
+
+					    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-fields">
+					      <input class="mdl-textfield__input voltage_rating specifications" type="number" step="any" id="voltage_rating_{{details_obj.id}}" autocomplete="off" tabindex="0" autocapitalize="off" autocorrect="off" spellcheck="false" value="{{details_obj.voltage_rating}}">
+					      <label class="mdl-textfield__label" for="voltage_rating_{{details_obj.id}}">Voltage Rating (Volt)</label>
+					      <div class="help" style="display: none;">Please enter voltage rating</div>
+					    </div>
+			      		
+			      	</div>
+
+			      </span>
+			    </span>
+			  </li>
+
+			</ul>
+
+
+		</div>
+
+{% endif %}
+
+
+

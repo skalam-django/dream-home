@@ -1,0 +1,55 @@
+{% extends layout_1 %}
+{% load static %}
+{% load dh_static %}
+
+{% block this_base_head %}
+	
+{% endblock %}	
+	
+{% block this_base_css %}
+	
+{% endblock %}	
+
+{% block this_base_body %}
+    <div class = "mdl-grid" style="justify-content: center;">
+	{% for text_field in text_fields %}
+		<div class = "mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet graybox" style="margin: 15px">
+		{% if text_field.editable %}	
+		<label class="mdc-text-field mdc-text-field--outlined">
+		  <span class="mdc-notched-outline">
+		    <span class="mdc-notched-outline__leading"></span>
+		    <span class="mdc-notched-outline__notch">
+		      <span class="mdc-floating-label" id="{{text_field.label_id}}">{{text_field.label}}</span>
+		    </span>
+		    <span class="mdc-notched-outline__trailing"></span>
+		    </span>
+		  	<input type="text" class="mdc-text-field__input" aria-labelledby="{{text_field.label_id}}" value="{{text_field.value}}">
+		</label>
+		{% else %}
+			<label class="mdc-text-field mdc-text-field--filled mdc-text-field--disabled">
+			  <span class="mdc-text-field__ripple"></span>
+			  <span class="mdc-floating-label" id="{{text_field.label_id}}">{{text_field.label}}</span>
+			  <input class="mdc-text-field__input" type="text" aria-labelledby="{{text_field.label_id}}" value="{{text_field.value}}" disabled>
+			  <span class="mdc-line-ripple"></span>
+			</label>
+		{% endif %}
+	</div>
+	{% endfor %}
+</div>
+{% endblock %}	
+
+	{% block footer %}	
+		<div class = "mdl-mega-footer__bottom-section">
+			<button type="button" class="mdc-button mdc-button--raised"><strong>Update</strong></button>
+			<button type="reset" class="mdc-button"><strong>Reset</strong></button>
+		</div>  			
+	{% endblock %}
+
+{% block this_base_js %}
+	<script type="text/javascript">
+		document.addEventListener("DOMContentLoaded", function(event) {  
+
+	});
+
+	</script>
+{% endblock %}
