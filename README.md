@@ -95,19 +95,19 @@ celery -A dreamhome worker -B --loglevel=info
 http://localhost:8000
 
 ## Enable Appliance-NodeMCU to communicate with Master (ESP32)
-Step1: Upload appliance_credentials.ino (MCU Code/appliance_credentials/appliance_credentials.ino) to NodeMCU. This will write the credentials in EEPROM
+Step1: Using Arduino IDE upload appliance_credentials.ino (MCU Code/appliance_credentials/appliance_credentials.ino) to NodeMCU. This will write the credentials in EEPROM
 
-Step2: Upload ApplianceClient.ino (MCU Code/ApplianceClient/ApplianceClient.ino) in that NodeMCU again. This is the code which communicates with Master and the Appliances
+Step2: Using Arduino IDE upload ApplianceClient.ino (MCU Code/ApplianceClient/ApplianceClient.ino) in that NodeMCU again. This is the code which communicates with Master and the Appliances
 
 ## Enable Operator-NodeMCU to communicate with Master (ESP32)
-Step1: Upload operator_credentials.ino (MCU Code/operator_credentials/operator_credentials.ino) to NodeMCU
+Step1: Using Arduino IDE upload operator_credentials.ino (MCU Code/operator_credentials/operator_credentials.ino) to NodeMCU
 
-Step2: Upload OperatorClient.ino (MCU Code/OperatorClient/OperatorClient.ino) in that NodeMCU again. This is the code which communicates with Master and the Operators/Sensors
+Step2: Using Arduino IDE upload OperatorClient.ino (MCU Code/OperatorClient/OperatorClient.ino) in that NodeMCU again. This is the code which communicates with Master and the Operators/Sensors
 
 ## Enable Master-ESP32 to communicate with Slaves (Appliance-NodeMCU and Operator-NodeMCU) and Server
-Step1: Upload master_credentials.ino (MCU Code/master_credentials/master_credentials.ino) to NodeMCU
+Step1: Using Arduino IDE upload master_credentials.ino (MCU Code/master_credentials/master_credentials.ino) to NodeMCU
 
-Step2: Upload OperatorClient.ino (MCU Code/MasterSocketServer/MasterSocketServer.ino) in that NodeMCU again. This is the code which communicates with Slaves(Operators and Appliances) and the Server
+Step2: Using Arduino IDE upload OperatorClient.ino (MCU Code/MasterSocketServer/MasterSocketServer.ino) in that NodeMCU again. This is the code which communicates with Slaves(Operators and Appliances) and the Server
 
 
 
