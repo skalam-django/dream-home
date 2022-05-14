@@ -51,8 +51,8 @@ DATABASES['default'] = {
 
 
 
-STATIC_ROOT = os.path.join(BASE_DIR, "../static/")
-MEDIA_ROOT = os.path.join(BASE_DIR, '../data/')
+STATIC_ROOT = BASE_DIR / "../static/"
+# MEDIA_ROOT = BASE_DIR / '../data/'
 STATIC_VERSION = 1.0
 
 

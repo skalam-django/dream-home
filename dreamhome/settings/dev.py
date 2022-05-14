@@ -23,7 +23,7 @@ try:
 except:
     SECRET_KEY = '9ewkumuw^0-k+_xij(g^byzycpxo!j(xy6-hy^dh#%8*4#ik5r'
 
-ALLOWED_HOSTS = ["localhost", ]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 INSTALLED_APPS += [
    
@@ -31,9 +31,10 @@ INSTALLED_APPS += [
 
 
 STATIC_ROOT = BASE_DIR / "../static/"
-MEDIA_ROOT = BASE_DIR / '../data/'
+# MEDIA_ROOT = BASE_DIR / '../data/'
 STATIC_VERSION = 1.0
 
+print("STATIC_ROOT: ", STATIC_ROOT.absolute())
 
 try:
     SSL = True if os.environ.get('DH_SSL') is not None and os.environ.get('DH_SSL')=='True' else False
@@ -49,9 +50,6 @@ if SSL == True:
     SECURE_HSTS_PRELOAD             =   True
     SECURE_REDIRECT_EXEMPT          =   ["^insecure/"]
 
-STATIC_ROOT = os.path.join(BASE_DIR, "../static/")
-MEDIA_ROOT = os.path.join(BASE_DIR, '../data/')
-STATIC_VERSION = 1.0
 
 DATABASES['default'] = {
                         'ENGINE'    :   'django.db.backends.postgresql_psycopg2',

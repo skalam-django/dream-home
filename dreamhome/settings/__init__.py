@@ -43,4 +43,4 @@ if (PRINT_EANABLED==False) or ((PRODUCTION==True) and (os.environ.get('DH_SHELL'
 	pass
 else:	
 	print("WARNING: print CAN CAUSE BROKEN PIPE")
-	print("SET sl_PRINT TO FALSE (RECOMENDED)")
+	print("SET DH_PRINT TO FALSE (RECOMENDED)")
