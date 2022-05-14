@@ -1,6 +1,6 @@
 # Dream Home
 
-Dream Home: It's a Room Automation,
+Dream Home: It's a Room Automation Application.
 
 ### Repo owner or admin
 
@@ -15,9 +15,10 @@ Sk Khurshid Alam
 * [**daphne**](https://pypi.org/project/daphne/0.8.1/)
 * [**NodeMCU**](https://nodemcu.readthedocs.io/en/release/)
 * [**ESP32**](https://www.espressif.com/en/products/socs/esp32)
+* [**SIM800L**](https://lastminuteengineers.com/sim800l-gsm-module-arduino-tutorial/)
 * [**Arduino IDE**](https://www.arduino.cc/en/software)
 
-## Run the server
+## Setup everything needed to run the server
 
 Install PostgreSQL, you may follow the steps given in this link:
 ```
@@ -94,12 +95,12 @@ celery -A dreamhome worker -B --loglevel=info
 ## Sample Test
 http://localhost:8000
 
-## Enable Appliance-NodeMCU to communicate with Master (ESP32)
+## Enable Appliance-NodeMCU to communicate with Master (ESP32) and Appliances
 Step1: Using Arduino IDE upload appliance_credentials.ino (MCU Code/appliance_credentials/appliance_credentials.ino) to NodeMCU. This will write the credentials in EEPROM
 
 Step2: Using Arduino IDE upload ApplianceClient.ino (MCU Code/ApplianceClient/ApplianceClient.ino) in that NodeMCU again. This is the code which communicates with Master and the Appliances
 
-## Enable Operator-NodeMCU to communicate with Master (ESP32)
+## Enable Operator-NodeMCU to communicate with Master (ESP32) and Operators/Sensors
 Step1: Using Arduino IDE upload operator_credentials.ino (MCU Code/operator_credentials/operator_credentials.ino) to NodeMCU
 
 Step2: Using Arduino IDE upload OperatorClient.ino (MCU Code/OperatorClient/OperatorClient.ino) in that NodeMCU again. This is the code which communicates with Master and the Operators/Sensors
@@ -107,8 +108,9 @@ Step2: Using Arduino IDE upload OperatorClient.ino (MCU Code/OperatorClient/Oper
 ## Enable Master-ESP32 to communicate with Slaves (Appliance-NodeMCU and Operator-NodeMCU) and Server
 Step1: Using Arduino IDE upload master_credentials.ino (MCU Code/master_credentials/master_credentials.ino) to NodeMCU
 
-Step2: Using Arduino IDE upload OperatorClient.ino (MCU Code/MasterSocketServer/MasterSocketServer.ino) in that NodeMCU again. This is the code which communicates with Slaves(Operators and Appliances) and the Server
+Step2: Using Arduino IDE upload MasterSocketServer.ino (MCU Code/MasterSocketServer/MasterSocketServer.ino) in that NodeMCU again. This is the code which communicates with Slaves(Operators and Appliances) and the Server
 
+Step3: Connect SIM800l with ESP32 via Serial Bus (Rx Pin: 16, Tx Pin: 17, Rst Pin: 5)
 
 
 
