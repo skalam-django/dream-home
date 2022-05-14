@@ -7,13 +7,13 @@ Dream Home: It's a Room Automation,
 Sk Khurshid Alam
 
 ### Dependencies
-* [**Python**]()
-* [**Django**]()
-* [**Celery**]()
-* [**Redis**]()
-* [**dphane**]()
-* [**NodeMCU**]()
-* [**ESP32**]()
+* [**Python**](https://www.python.org/downloads/)
+* [**Django**](https://docs.djangoproject.com/en/4.0/)
+* [**Celery**](https://docs.celeryq.dev/en/stable/getting-started/introduction.html)
+* [**Redis**](https://redis.io/download/)
+* [**daphne**](https://pypi.org/project/daphne/0.8.1/)
+* [**NodeMCU**](https://nodemcu.readthedocs.io/en/release/)
+* [**ESP32**](https://www.espressif.com/en/products/socs/esp32)
 
 ## Run the server
 
@@ -74,3 +74,22 @@ celery -A dreamhome worker -B --loglevel=info
 
 ## Sample Test
 http://localhost:8000
+
+## Enable Appliance-NodeMCU to communicate with Master (ESP32)
+Step1: Upload appliance_credentials.ino (MCU Code/appliance_credentials/appliance_credentials.ino) to NodeMCU. This will write the credentials in EEPROM
+
+Step2: Upload ApplianceClient.ino (MCU Code/ApplianceClient/ApplianceClient.ino) in that NodeMCU again. This is the code which communicates with Master and the Appliances
+
+## Enable Operator-NodeMCU to communicate with Master (ESP32)
+Step1: Upload operator_credentials.ino (MCU Code/operator_credentials/operator_credentials.ino) to NodeMCU
+
+Step2: Upload OperatorClient.ino (MCU Code/OperatorClient/OperatorClient.ino) in that NodeMCU again. This is the code which communicates with Master and the Operators/Sensors
+
+## Enable Master-ESP32 to communicate with Slaves (Appliance-NodeMCU and Operator-NodeMCU) and Server
+Step1: Upload master_credentials.ino (MCU Code/master_credentials/master_credentials.ino) to NodeMCU
+
+Step2: Upload OperatorClient.ino (MCU Code/MasterSocketServer/MasterSocketServer.ino) in that NodeMCU again. This is the code which communicates with Slaves(Operators and Appliances) and the Server
+
+
+
+
