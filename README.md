@@ -10,12 +10,18 @@ Sk Khurshid Alam
 * [**Python**](https://www.python.org/downloads/)
 * [**Django**](https://docs.djangoproject.com/en/4.0/)
 * [**Celery**](https://docs.celeryq.dev/en/stable/getting-started/introduction.html)
+* [**PostgreSQL**](https://www.postgresql.org/download/)
 * [**Redis**](https://redis.io/download/)
 * [**daphne**](https://pypi.org/project/daphne/0.8.1/)
 * [**NodeMCU**](https://nodemcu.readthedocs.io/en/release/)
 * [**ESP32**](https://www.espressif.com/en/products/socs/esp32)
 
 ## Run the server
+
+Install PostgreSQL, you may follow the steps given in this link:
+```
+https://www.cherryservers.com/blog/how-to-install-and-setup-postgresql-server-on-ubuntu-20-04
+```
 
 Install Redis-Server:
 ```
@@ -32,6 +38,7 @@ Start Redis as Service:
 sudo systemctl start redis
 ```
 
+
 Create Virtual Enviroment:
 ```
 virtualenv -p python3 venv
@@ -47,6 +54,12 @@ Install Dependecies:
 pip install -r requirements.txt
 ```
 
+Create database in your PostgreSQL server:
+```
+create database dreamhome;
+```
+
+
 Export Enviroment Variables:
 ```
 export DH_DEV=True
@@ -59,6 +72,11 @@ export DH_USER=postgres
 export DH_PASSWORD=admin@123
 export DH_HOST=localhost
 export DH_PORT=5432
+```
+
+Migrate models into database:
+```
+python manage.py migrate
 ```
 
 Run Application directly in Linux Terminal:
