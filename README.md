@@ -15,6 +15,7 @@ Sk Khurshid Alam
 * [**daphne**](https://pypi.org/project/daphne/0.8.1/)
 * [**NodeMCU**](https://nodemcu.readthedocs.io/en/release/)
 * [**ESP32**](https://www.espressif.com/en/products/socs/esp32)
+* [**Arduino IDE**](https://www.arduino.cc/en/software)
 
 ## Run the server
 
