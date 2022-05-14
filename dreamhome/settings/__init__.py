@@ -2,14 +2,14 @@ import sys,os
 
 print()
 print()
-SERVER = 	'PRODUCTION' if (os.environ.get('sl_PROD') is not None and os.environ.get('sl_PROD')=='True') else (
-			'DEVELOPEMENT' if (os.environ.get('sl_DEV') is not None and os.environ.get('sl_DEV')=='True') else
+SERVER = 	'PRODUCTION' if (os.environ.get('DH_PROD') is not None and os.environ.get('DH_PROD')=='True') else (
+			'DEVELOPEMENT' if (os.environ.get('DH_DEV') is not None and os.environ.get('DH_DEV')=='True') else
 			'LOCAL')
 print(f"SERVER =====> {SERVER}")
 
-if os.environ.get('sl_PROD') is not None and os.environ.get('sl_PROD')=='True':
+if os.environ.get('DH_PROD') is not None and os.environ.get('DH_PROD')=='True':
     from dreamhome.settings.prod import * 
-elif os.environ.get('sl_DEV') is not None and os.environ.get('sl_DEV')=='True':
+elif os.environ.get('DH_DEV') is not None and os.environ.get('DH_DEV')=='True':
     from dreamhome.settings.dev import *
 else:
 	from dreamhome.settings.local import *     
@@ -36,7 +36,7 @@ print()
 print()
 print()
 
-if (PRINT_EANABLED==False) or ((PRODUCTION==True) and (os.environ.get('sl_SHELL') is None or os.environ.get('sl_SHELL')=='False')):
+if (PRINT_EANABLED==False) or ((PRODUCTION==True) and (os.environ.get('DH_SHELL') is None or os.environ.get('DH_SHELL')=='False')):
 	print("REDIRECTING ALL STDOUT TO DEVNULL")
 	print()
 	sys.stdout = open(os.devnull, 'w')

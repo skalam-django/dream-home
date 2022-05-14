@@ -8,18 +8,18 @@ DEBUG = True
 TRACEBACK_OFF = False
 
 try:
-    PRINT_EANABLED = True if (config('sl_PRINT') is not None and config('sl_PRINT')=='True') else False
+    PRINT_EANABLED = True if (config('DH_PRINT') is not None and config('DH_PRINT')=='True') else False
 except:
     PRINT_EANABLED = False
 
 
 try:
-    SERVICES = True if (config('sl_SERVICES') is not None and config('sl_SERVICES')=='True') else False
+    SERVICES = True if (config('DH_SERVICES') is not None and config('DH_SERVICES')=='True') else False
 except:
     SERVICES = False
 
 try:
-    SECRET_KEY = config('sl_SECRET_KEY')
+    SECRET_KEY = config('DH_SECRET_KEY')
 except:
     SECRET_KEY = '9ewkumuw^0-k+_xij(g^byzycpxo!j(xy6-hy^dh#%8*4#ik5r'
 
@@ -36,7 +36,7 @@ STATIC_VERSION = 1.0
 
 
 try:
-    SSL = True if os.environ.get('sl_SSL') is not None and os.environ.get('sl_SSL')=='True' else False
+    SSL = True if os.environ.get('DH_SSL') is not None and os.environ.get('DH_SSL')=='True' else False
 except:
     SSL = False    
 
@@ -55,11 +55,11 @@ STATIC_VERSION = 1.0
 
 DATABASES['default'] = {
                         'ENGINE'    :   'django.db.backends.postgresql_psycopg2',
-                        'NAME'      :   config('sl_NAME'), 
-                        'USER'      :   config('sl_USER'),
-                        'PASSWORD'  :   config('sl_PASSWORD'),
-                        'HOST'      :   config('sl_HOST'),
-                        'PORT'      :   config('sl_PORT'),
+                        'NAME'      :   config('DH_NAME'), 
+                        'USER'      :   config('DH_USER'),
+                        'PASSWORD'  :   config('DH_PASSWORD'),
+                        'HOST'      :   config('DH_HOST'),
+                        'PORT'      :   config('DH_PORT'),
                         'TIME_ZONE' :   None,
                         }
 

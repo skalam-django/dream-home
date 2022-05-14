@@ -8,11 +8,11 @@ DEBUG = False
 
 PRINT_EANABLED = False
 
-TRACEBACK_OFF = False if (config('sl_TRACEBACK_OFF') is not None and config('sl_TRACEBACK_OFF')=='False') else True
+TRACEBACK_OFF = False if (config('DH_TRACEBACK_OFF') is not None and config('DH_TRACEBACK_OFF')=='False') else True
 
-SERVICES = True if (config('sl_SERVICES') is not None and config('sl_SERVICES')=='True') else False
+SERVICES = True if (config('DH_SERVICES') is not None and config('DH_SERVICES')=='True') else False
 
-SECRET_KEY = config('sl_SECRET_KEY') #9ewkumuw^0-k+_xij(g^byzycpxo!j(xy6-hy^dh#%8*4#ik5r
+SECRET_KEY = config('DH_SECRET_KEY') #9ewkumuw^0-k+_xij(g^byzycpxo!j(xy6-hy^dh#%8*4#ik5r
 
 ALLOWED_HOSTS = [
                     
@@ -28,7 +28,7 @@ INSTALLED_APPS += [
 
 
 
-SSL = True if os.environ.get('sl_SSL') is not None and os.environ.get('sl_SSL')=='True' else False    
+SSL = True if os.environ.get('DH_SSL') is not None and os.environ.get('DH_SSL')=='True' else False    
 if SSL == True:
     SECURE_SSL_REDIRECT             =   True
     SECURE_PROXY_SSL_HEADER         =   ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -40,11 +40,11 @@ if SSL == True:
 
 DATABASES['default'] = {
                         'ENGINE'    :   'django.db.backends.postgresql_psycopg2',
-                        'NAME'      :   config('sl_NAME'), 
-                        'USER'      :   config('sl_USER'),
-                        'PASSWORD'  :   config('sl_PASSWORD'),
-                        'HOST'      :   config('sl_HOST'),
-                        'PORT'      :   config('sl_PORT'),
+                        'NAME'      :   config('DH_NAME'), 
+                        'USER'      :   config('DH_USER'),
+                        'PASSWORD'  :   config('DH_PASSWORD'),
+                        'HOST'      :   config('DH_HOST'),
+                        'PORT'      :   config('DH_PORT'),
                         'TIME_ZONE' :   None,
 
                     }
