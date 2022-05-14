@@ -1,0 +1,323 @@
+{% extends base_template %}
+{% load static %}
+{% load dh_static %}
+
+
+{% block base_head %}
+	<link rel="stylesheet" type="text/css" href="{% dh_static 'dreamhome' 'layout_1.css' %}?v={{request.META.static_version}}">
+
+
+	{% block this_base_head %}
+		
+	{% endblock %}	
+
+{% endblock %}
+
+{% block base_css %}
+
+<style type="text/css">
+	
+
+body {
+  /*display: flex;*/
+  height: 100vh;
+  table-layout: fixed;
+}
+
+.mdc-drawer-app-content {
+  flex: auto;
+  overflow: auto;
+  position: relative;
+}
+
+.main-content {
+  overflow: auto;
+  height: 100%;
+}
+
+.app-bar {
+  position: absolute;
+}
+
+.mdc-top-app-bar {
+  z-index: 7;
+}
+
+
+  .input-fields{
+    display: flex;
+  }
+
+ .dialog {
+    /*display: block;*/
+    border: none;
+    box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);
+    padding: 0em !important;
+    width: 344px;
+    top: 24px;
+    bottom: 24px;
+    height: 37em;
+  }
+
+  .dialog-content {
+    padding: 20px 24px 24px 24px;
+    color: rgba(0,0,0, 0.54); 
+    overflow-y:auto;
+    height: 23em;
+  }  
+
+
+  .help {
+      -webkit-transform: translateY(-10px);
+      -ms-transform: translateY(-10px);
+      transform: translateY(-10px);
+      color: #fff;
+      font-weight: bold;
+      position: absolute;
+      line-height: 16px;
+      padding: 8px 12px;
+      font-size: 12px;
+      background: #555;
+      -webkit-box-shadow: rgba(0,0,0,0.05) 1px 1px 2px 0;
+      box-shadow: rgba(0,0,0,0.05) 1px 1px 2px 0;
+      z-index: 3;
+      -webkit-border-radius: 3px;
+      border-radius: 3px;
+      top: 100%;
+      margin-top: 10px;
+      pointer-events: none !important;
+  }
+    .dialog-close{
+      position: absolute;
+      right: 0;
+      top: 0;
+      cursor: pointer;
+      font-size: 18px;
+      opacity: .6;
+      width: 24px;
+      text-align: center;
+      line-height: 26px;
+      z-index: 1000000000;     
+    } 
+
+    .dialog-header {
+      -webkit-border-radius: 3px 3px 0 0;
+      border-radius: 3px 3px 0 0;
+      padding: 24px;
+      overflow: hidden;
+      max-height: 128px;
+      position: relative;
+      z-index: 3;
+      -webkit-flex-shrink: 0;
+      -ms-flex-negative: 0;
+      flex-shrink: 0;
+    }
+
+    .dialog-header::before, .dialog-header::after {
+      content: '';
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      position: absolute;
+      background-image: -webkit-gradient(linear,left top, right bottom,from(rgba(255,255,255,0.2)),to(rgba(0,0,0,0.2)));
+      background-image: -webkit-linear-gradient(top left,rgba(255,255,255,0.2),rgba(0,0,0,0.2));
+      background-image: -o-linear-gradient(top left,rgba(255,255,255,0.2),rgba(0,0,0,0.2));
+      background-image: linear-gradient(to bottom right,rgba(255,255,255,0.2),rgba(0,0,0,0.2));
+      z-index: -1;
+    }
+    .mdl-layout__header{
+      display: block;
+    }
+
+
+</style>
+
+	{% block this_base_css %}
+
+	{% endblock %}	
+
+{% endblock %}		
+
+
+{% block base_body %}
+
+
+
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header mdc-top-app-bar--fixed">
+      <div class="mdl-layout__header-row">
+
+        <span class="mdl-layout-title"> {{layout.title}} </span>
+        <div class="mdl-layout-spacer"></div>
+	    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+			<button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" id="share" aria-label="Share">share</button>
+
+			<button class="mdc-top-app-bar__action-item mdc-icon-button" aria-label="Favorite"><i class="material-icons mdl-badge mdl-badge--overlap" data-badge="1">notifications_active</i></button>
+
+	      	<button id="more-vert" class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Options">more_vert</button>
+
+			<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+			    for="more-vert">
+			  <li class="mdl-menu__item"><button class="mdl-button" type="button"><i class="material-icons">notifications_active</i><span style="padding-left: 5px;">Enable Notification</span></button></li>
+			  <li disabled class="mdl-menu__item"><button disabled class="mdl-button" type="button"><i class="material-icons">help</i><span style="padding-left: 5px;">Help</span></button></li>
+			</ul>
+
+	    </section>
+      </div>
+
+    </header>
+    
+    {% if show_sidebar %}
+	    <div class="mdl-layout__drawer">
+	      <span class="mdl-layout-title" onclick='location="{{ request.scheme }}://{{request.get_host}}{{edit_profile.urls.get}}"'>
+
+				<i class="material-icons" style="top: 5px;position: relative;">
+				{{edit_profile.icon}}
+				</i>	
+	      	{{request.user.first_name}} {{request.user.last_name}}<p>{{request.user.username}}</p></span>
+	      <nav class="mdl-navigation">
+	      	{% for items in sidebar_dict %}
+	      		<a class="mdl-navigation__link mdl-js-ripple-effect" href="{{items.urls.get}}?idx={{forloop.counter0}}" id="{{items.id}}"><i class="material-icons">{{items.icon}}</i><strong style="padding-left: 15px;">{{items.caption}}</strong></a>
+	      	{% endfor %}
+	        <div class="drawer-option">
+	        	<form method="post" action="{{ request.scheme }}://{{request.get_host}}{{logout.urls.post}}">
+	        		{% csrf_token %}
+		          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color--accent" type="submit">
+						<i class="material-icons">{{logout.icon}}</i>
+		            Logout
+		          </button>
+		        </form> 
+
+
+
+	<!--           <button class="enable-notifications mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color--accent">
+	            Enable Notifications
+	          </button> -->
+	        </div>
+	      </nav>
+	    </div>
+    {% endif %}
+
+
+
+  <!-- <div class="mdc-drawer-app-content mdc-top-app-bar--fixed-adjust"> -->
+    <main class="mdl-layout__content">
+    
+      {% if back_btn %}
+      <button class="mdl-layout-icon mdl-button mdl-js-button mdl-button--icon" onclick="history.go(-1);">
+        <i class="material-icons">arrow_back</i>
+      </button>  
+      {% endif %}
+      <section class="mdl-layout__tab-panel" id="scroll-tab">
+        <div class="page-content" style="text-align: center;">
+
+  	      {% block non-scroll %}
+  	      {% endblock %}
+
+      	<div class="container" style="text-align: center; align-items: center;justify-content: center; height:420px; overflow-y:auto; display: flex;">
+
+
+  		 	{% block this_base_body %}
+
+  			{% endblock %}
+  		</div>
+
+        </div>
+      </section>
+
+			{% if layout.footer %}
+			<footer class = "mdl-mega-footer" style="text-align: center;background: white">
+			{% block footer %}
+
+			{% endblock %}
+
+			<div class="mdc-touch-target-wrapper" id="fab-div" style="display: none;">
+				<button class="mdc-fab mdc-fab--extended">
+				  <div class="mdc-fab__ripple"></div>
+				  <span class="material-icons mdc-fab__icon" id="fab-icon"></span>
+				  <span class="mdc-fab__label" id="fab-text"></span>
+				</button>
+			</div>
+
+			</footer>
+			{% endif %}
+
+
+    </main>
+  <!-- </div> -->
+
+</div>
+{% endblock %}
+
+{% block base_js %}
+
+<script type="text/javascript" src="{% dh_static 'dreamhome' 'layout_1.js' %}?v={{request.META.static_version}}"></script>
+<script type="text/javascript">
+	var THIS_BASE_TEMPLATE_JS = (function(BASE_JS) {
+		$(document).ready(function(){
+			$(".mdl-layout__tab-panel").css("display", "block")
+			$("#share").on("click", function(){
+				if( BASE_JS.isMobile.any() ) {
+					var text = "Hi, Niraj Caterer has lauched online service.\nFrom now you can put your order online.\nPlease visit here for more details: "
+					var url = window.location.origin + "/"; 
+					var message = encodeURIComponent(text) + " - " + encodeURIComponent(url);
+					var whatsapp_url = "whatsapp://send?text=" + message;
+					// window.location.href = whatsapp_url;
+					window.open(whatsapp_url ,"_blank");
+					}else{
+					BASE_JS.showToast(0, "This feature is unavailable in your device", "unavailable");
+				}
+			});
+		});
+
+		class FabBtn{
+			text="Add";
+			icon="add";
+			callback = function(e){
+				console.log(e)
+			};
+			constructor({text=this.text, icon=this.icon, callback=this.callback} = {}){
+				this.text = text;
+				this.icon = icon;
+				this.callback = callback;
+			}
+			show(){
+				$("#fab-text").text(this.text);
+				$("#fab-icon").text(this.icon);
+				let fab_obj = new mdc.ripple.MDCRipple(document.querySelector('.mdc-fab'));
+				fab_obj.root.onclick=this.callback;
+				$("#fab-div").show();
+				return fab_obj;
+			}
+		}
+    var url_dict_idx = new Object;
+    var url_dict_id = new Object;
+    {% for sidebar in sidebar_dict %}
+      url_dict_idx["{{foorloop.counter0}}"] = "{{sidebar.urls.post|safe|escapejs}}";
+      url_dict_id["{{sidebar.id}}"] = "{{sidebar.urls.post|safe|escapejs}}";
+    {% endfor %}
+
+    var get_post_url = function(id){
+      var url = null;
+      try{
+        var idx = BASE_JS.getUrlParameter("idx");
+      }catch(e){
+        var idx = null;
+      }
+      return url_dict_idx[idx] || url_dict_id[id];
+    }
+
+		return {
+              FabBtn : FabBtn,
+              get_post_url : get_post_url,
+            }
+
+	})(BASE_JS)
+</script>
+
+	{% block this_base_js %}
+
+	{% endblock %}
+
+{% endblock %}	

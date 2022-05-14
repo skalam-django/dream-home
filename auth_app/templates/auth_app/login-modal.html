@@ -1,0 +1,150 @@
+{% load static %}
+
+<style type="text/css">
+  
+  .input-fields{
+    display: flex;
+  }
+
+ .dialog {
+    /*display: block;*/
+    border: none;
+    box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);
+    padding: 0em !important;
+    height: 19em;
+    width: 25em;
+    top: 6em;
+    bottom: 6em;
+  }
+
+  .dialog__content {
+    padding: 20px 24px 24px 24px;
+    color: rgba(0,0,0, 0.54); 
+    height: 9em;
+  }  
+
+
+  .login-footer{
+    background-color:white;
+    padding-bottom: 2em;        
+  }
+  .login-close{
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    font-size: 18px;
+    opacity: .6;
+    width: 24px;
+    text-align: center;
+    line-height: 26px;
+    z-index: 1000000000;     
+  }
+
+
+    .login-title {
+      white-space: nowrap;
+      position: relative;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.12);
+      text-align: center !important;
+
+      -o-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      font-size: 18px;
+
+    }
+
+
+</style>
+
+
+<dialog class="mdl-dialog dialog" id="login-dialog">
+  <form autocomplete="off" method="post" name="login-form">
+    <header class="mdl-layout__header" style="display: block;">
+      <div class="login-close dialog-close">×</div>
+      <div class="dialog-header">
+        <div class="login-title">{{login_type|default:'Member Login'}}</div>
+      </div>
+    </header>
+
+    <div class="mdl-dialog__content dialog__content dialog-content">
+        
+
+
+        <label class="mdc-text-field mdc-text-field--outlined" style="margin-bottom: 1em;">
+          <span class="mdc-notched-outline">
+            <span class="mdc-notched-outline__leading"></span>
+            <span class="mdc-notched-outline__notch">
+              <span class="mdc-floating-label" id="username-label-id">Username</span>
+            </span>
+            <span class="mdc-notched-outline__trailing"></span>
+          </span>
+          <input name="username" type="text" autocomplete="false" class="mdc-text-field__input" aria-labelledby="username-label-id" id="id-username">
+        </label>
+
+
+        <label class="mdc-text-field mdc-text-field--outlined">
+          <span class="mdc-notched-outline">
+            <span class="mdc-notched-outline__leading"></span>
+            <span class="mdc-notched-outline__notch">
+              <span class="mdc-floating-label" id="password-label-id">Password</span>
+            </span>
+            <span class="mdc-notched-outline__trailing"></span>
+          </span>
+          <input type="text" style="display:none;">
+          <input name="password" type="password" autocomplete="new-password" class="mdc-text-field__input" aria-labelledby="password-label-id" id="id-password">
+        </label>
+
+      
+      <Portal>
+        <div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar" id="snackbar2" style="">
+          <div class="mdl-snackbar__text"></div>
+          {% csrf_token %}
+          <button type="button" class="mdl-snackbar__action"></button>
+        </div>
+      </Portal>
+      <Portal>
+        <div id="loader2" style="display: none; z-index: 1050;  position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);">
+          <div class = "mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+        </div>
+      </div>
+    </Portal>
+    <footer class="mdl-mega-footer login-footer">
+      <button type="submit" class="mdc-button mdc-button--raised login-btn">Login</button>
+    </footer>
+  </form>
+</dialog>
+
+
+
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function(event) {  
+      var dialog = document.querySelector('#login-dialog');
+      if (! dialog.showModal) {
+        dialogPolyfill.registerDialog(dialog);
+      } 
+      dialog.querySelector('.login-close').addEventListener('click', function() {
+        dialog.close();
+      });
+      
+
+    var textFieldArr = new Array();
+    document.querySelectorAll('.mdc-text-field').forEach(function(el){
+      textFieldArr.push(new mdc.textField.MDCTextField(el));
+    });   
+    dialog.querySelector('.login-btn').addEventListener('click', function(event) {
+      event.preventDefault();
+      textFieldArr.forEach(function(obj){
+        if (obj.value=="" || obj.value==null){
+          BASE_JS.showToast(2, `${obj.root.innerText} is empty.`);
+          throw `${obj.root.innerText} is empty.`;
+        }
+      });
+      document.forms['login-form'].submit();
+    });
+
+    dialog.showModal();
+  });
+</script>
+
