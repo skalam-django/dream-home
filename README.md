@@ -1,6 +1,6 @@
 # Dream Home
 
-Dream Home: It's a Room Automation Application.
+Dream Home: Fully automated Room Electrical Appliances Control with Web app interface for controlling visualizing/monitoring/setting appliances or sensor's references or remotely control the appliances. 
 
 ### Repo owner or admin
 
@@ -110,7 +110,7 @@ Step1: Using Arduino IDE upload master_credentials.ino (MCU Code/master_credenti
 
 Step2: Using Arduino IDE upload MasterSocketServer.ino (MCU Code/MasterSocketServer/MasterSocketServer.ino) in that NodeMCU again. This is the code which communicates with Slaves(Operators and Appliances) and the Server
 
-Step3: Connect SIM800l with ESP32 via Serial Bus (Rx Pin: 16, Tx Pin: 17, Rst Pin: 5)
+Step3: Connect SIM800L with ESP32 via Serial Bus (Rx Pin: 16, Tx Pin: 17, Rst Pin: 5)
 
 
 
